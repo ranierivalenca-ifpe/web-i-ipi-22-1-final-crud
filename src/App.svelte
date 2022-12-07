@@ -1,24 +1,24 @@
 <script>
-  import Home from './lib/Home.svelte';
-  import Register from './lib/Register.svelte';
-  import Login from './lib/Login.svelte';
-  import { currentPage } from './stores';
+  import Home from "./lib/Home.svelte";
+  import Register from "./lib/Register.svelte";
+  import Login from "./lib/Login.svelte";
+  import { currentPage } from "./stores";
 </script>
 
 <main>
   <h1>My app</h1>
   <nav>
-    <div on:click={() => $currentPage = 'home'}>Home</div>
-    <div on:click={() => $currentPage = 'register'}>Cadastrar</div>
-    <div on:click={() => $currentPage = 'login'}>Login</div>
+    <div on:click={() => ($currentPage = "home")}>Home</div>
+    <div on:click={() => ($currentPage = "register")}>Cadastrar</div>
+    <div on:click={() => ($currentPage = "login")}>Login</div>
   </nav>
   <div>
-    {#if $currentPage == 'home'}
-      <Home></Home>
-    {:else if $currentPage == 'register'}
-      <Register></Register>
-    {:else if $currentPage == 'login'}
-      <Login></Login>
+    {#if $currentPage == "home"}
+      <Home />
+    {:else if $currentPage == "register"}
+      <Register />
+    {:else if $currentPage == "login"}
+      <Login />
     {/if}
   </div>
 </main>
