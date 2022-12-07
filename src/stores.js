@@ -16,9 +16,22 @@ users.subscribe(v => {
     fetch('http://localhost:8000/add-user.php', {
         method: 'post',
         body: formData
-    });
+    }); // non blocking
+    console.log('oi');
 })
 
-export const login = (usernane, pw) => {
-    console.log(`try to login with ${usernane}:${pw}`)
+export const login = async (username, pw) => {
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', pw);
+    const response = await fetch('http://localhost:8000/login.php', {
+        method: 'post',
+        body: formData
+    });
+    if (!response.ok) {
+        alert('usuário ou senha incorretos');
+        return;
+    }
+    const data = await response.json();
+    currentUser.set(data);
 }

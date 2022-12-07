@@ -2,15 +2,19 @@
   import Home from "./lib/Home.svelte";
   import Register from "./lib/Register.svelte";
   import Login from "./lib/Login.svelte";
-  import { currentPage } from "./stores";
+  import { currentPage, currentUser } from "./stores";
 </script>
 
 <main>
   <h1>My app</h1>
   <nav>
     <div on:click={() => ($currentPage = "home")}>Home</div>
-    <div on:click={() => ($currentPage = "register")}>Cadastrar</div>
-    <div on:click={() => ($currentPage = "login")}>Login</div>
+    {#if !$currentUser}
+      <div on:click={() => ($currentPage = "register")}>Cadastrar</div>
+      <div on:click={() => ($currentPage = "login")}>Login</div>
+    {:else}
+      <div on:click={() => ($currentUser = null)}>Logout</div>
+    {/if}
   </nav>
   <div>
     {#if $currentPage == "home"}
